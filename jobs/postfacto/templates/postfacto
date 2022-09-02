@@ -32,7 +32,7 @@ export RAILS_ENV=production
 export RAILS_LOG_TO_STDOUT=true
 export DATABASE_URL=postgres://<%= p("database_user") %>:<%= p("database_password") %>@127.0.0.1:5432/postfacto_production
 export PATH=/var/vcap/packages/nodejs/bin:$PATH
-export SECRET_KEY_BASE=123412312312
+export SECRET_KEY_BASE=<%= p("secret_key") %>
 export RAILS_TMP=/var/vcap/data/postfacto
 export RAILS_SERVE_STATIC_FILES=1
 export USE_POSTGRES_FOR_ACTION_CABLE=true

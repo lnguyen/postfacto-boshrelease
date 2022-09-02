@@ -23,6 +23,8 @@ properties:
   database_user:
     description: Username to access Postgres
     default: postfacto@vmware.com
+  secret_key:
+    description: Secret for rails
   admin_password:
     description: Password to access Postgres
   admin_email:
