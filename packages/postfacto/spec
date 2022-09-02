@@ -1,0 +1,10 @@
+---
+name: postfacto
+dependencies:
+- ruby-2.7.3-r0.52.0
+- postgres-13
+- mariadb_connector_c
+- nodejs
+
+files:
+- postfacto/package-4.3.11.zip # downloaded https://github.com/pivotal/postfacto/releases the package-vendor and renamed

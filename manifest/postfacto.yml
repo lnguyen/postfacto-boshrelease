@@ -1,0 +1,61 @@
+name: postfacto
+instance_groups:
+- azs: [z1]
+  instances: 1
+  jobs:
+  - name: bpm
+    release: bpm
+  - name: postgres
+    release: postfacto
+    properties:
+      password: ((postgres_password))
+  - name: postfacto
+    release: postfacto
+    properties:
+      database_password: ((postgres_password))
+      database_user: postfacto
+      admin_password: adminpassword
+      admin_email: postfacto@vmware.com
+      nginx:
+        ssl:
+          cert: ((nginx_ssl.certificate))
+          key: ((nginx_ssl.private_key))
+  name: postfacto
+  networks:
+  - name: default
+    static_ips: [10.244.0.34]
+  stemcell: default
+  vm_type: default
+releases:
+- name: postfacto
+  url: https://github.com/lnguyen/postfacto-boshrelease
+  version: create
+- name: bpm
+  version: "1.1.16"
+  url: "https://bosh.io/d/github.com/cloudfoundry/bpm-release?v=1.1.16"
+  sha1: "492f181f4efa08c5f0b45d22cbe54f0a20edf99e"
+stemcells:
+- alias: default
+  os: ubuntu-xenial
+  version: latest
+update:
+  canaries: 2
+  canary_watch_time: 5000-60000
+  max_in_flight: 1
+  update_watch_time: 5000-60000
+
+variables:
+- name: postgres_password
+  type: password
+- name: default_ca
+  options:
+    common_name: ca
+    is_ca: true
+  type: certificate
+- name: nginx_ssl
+  options:
+    alternative_names:
+    - 10.244.0.34
+    ca: default_ca
+    common_name: 10.244.0.34
+  type: certificate

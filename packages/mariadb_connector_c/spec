@@ -1,0 +1,5 @@
+
+---
+name: mariadb_connector_c
+files:
+- mariadb-connector-c-3.1.13-src.tar.gz

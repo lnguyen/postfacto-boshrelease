@@ -1,0 +1,11 @@
+check process postfacto_nginx
+  with pidfile /var/vcap/sys/run/bpm/postfacto/nginx.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start postfacto -p nginx"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop postfacto -p nginx"
+  group vcap
+
+check process postfacto
+  with pidfile /var/vcap/sys/run/bpm/postfacto/postfacto.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start postfacto -p postfacto"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop postfacto -p postfacto"
+  group vcap

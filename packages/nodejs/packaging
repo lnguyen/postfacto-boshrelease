@@ -1,0 +1,5 @@
+set -e -x
+
+VERSION=12.8.0
+
+tar --strip-components=1 -xzf node-v${VERSION}-linux-x64.tar.gz -C ${BOSH_INSTALL_TARGET}

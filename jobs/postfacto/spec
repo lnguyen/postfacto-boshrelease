@@ -1,0 +1,34 @@
+---
+name: postfacto
+
+templates:
+  postfacto: bin/postfacto
+  config.js: config/config.js
+  bpm.yml: config/bpm.yml
+  pre-start.erb: bin/pre-start
+  nginx.conf: config/nginx.conf
+  nginx.key.erb: config/nginx.key
+  nginx.crt.erb: config/nginx.crt
+
+packages:
+- ruby-2.7.3-r0.52.0
+- postfacto
+- nodejs
+- mariadb_connector_c
+- nginx
+
+properties:
+  database_password:
+    description: Password to access Postgres
+  database_user:
+    description: Username to access Postgres
+    default: postfacto@vmware.com
+  admin_password:
+    description: Password to access Postgres
+  admin_email:
+    description: Username to access Postgres
+    default: postfacto@vmware.com
+  nginx.ssl.cert:
+    description: SSL Certificate for nginx (PEM encoded)
+  nginx.ssl.key:
+    description: SSL private key for nginx (PEM encoded)

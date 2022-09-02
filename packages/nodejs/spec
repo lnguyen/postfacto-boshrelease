@@ -1,0 +1,7 @@
+---
+name: nodejs
+
+dependencies: []
+
+files:
+- node-v12.8.0-linux-x64.tar.gz

@@ -1,0 +1,37 @@
+<%=
+nginx_config = {
+  "name" => "nginx",
+  "executable" => "/var/vcap/packages/nginx/sbin/nginx",
+  "args" => ["-c", "/var/vcap/jobs/postfacto/config/nginx.conf"],
+  "ephemeral_disk" => true,
+  "persistent_disk" => true,
+  "capabilities" => ["NET_BIND_SERVICE"],
+  "additional_volumes" => [
+    {
+      "path" => "/var/vcap/packages/nginx/logs",
+      "writable" => true
+    }
+  ]
+}
+
+
+postfacto_config = {
+  "name" => "postfacto",
+  "executable" => "/var/vcap/jobs/postfacto/bin/postfacto",
+  "ephemeral_disk" => true,
+  "persistent_disk" => true,
+  "additional_volumes" => [
+    {
+      "path" => "/var/vcap/packages/postfacto",
+      "writable" => true,
+      "allow_executions" => true
+    }
+  ]
+}
+
+config = {
+  "processes" => [nginx_config, postfacto_config],
+}
+
+YAML.dump(config)
+%>

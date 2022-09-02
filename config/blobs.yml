@@ -1,0 +1,9 @@
+mariadb-connector-c-3.1.13-src.tar.gz:
+  size: 968401
+  sha: sha256:0271a5edfd64b13bca5937267474e4747d832ec62e169fc2589d2ead63746875
+node-v12.8.0-linux-x64.tar.gz:
+  size: 21261730
+  sha: sha256:bc56ec3ee0e6b2945682fdfeb80187dbc1f67e59a78dc73ef225b4357509424f
+postfacto/package-4.3.11.zip:
+  size: 16877393
+  sha: sha256:4df494f6163fb99e8ffe6028a8b1aa61b9fec3ae641318ad2bd723588b06e621

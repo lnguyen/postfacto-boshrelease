@@ -1,0 +1,17 @@
+#!/bin/bash
+
+PACKAGE_DIR=/var/vcap/packages/postfacto
+JOB_DIR=/var/vcap/jobs/postfacto
+DATA_DIR=/var/vcap/data/postfacto
+TMPDIR=${DATA_DIR}/tmp
+
+mkdir -p ${DATA_DIR}/tmp
+if [ ! -L "${PACKAGE_DIR}/tmp" ] && [ -d "${PACKAGE_DIR}/tmp" ] 
+then
+    rm -rf ${PACKAGE_DIR}/tmp
+fi
+
+ln -s ${TMPDIR} ${PACKAGE_DIR}/tmp
+ln -fs $TMPDIR/proxy /var/vcap/packages/nginx/proxy_temp
+
+cp ${JOB_DIR}/config/config.js ${PACKAGE_DIR}/client/config.js

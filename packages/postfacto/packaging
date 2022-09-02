@@ -1,0 +1,24 @@
+set -e -x
+
+source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.7.3-r0.52.0/bosh/compile.env"
+export PATH=/var/vcap/packages/nodejs/bin:$PATH
+unzip postfacto/*.zip
+
+cp -r package/assets/. ${BOSH_INSTALL_TARGET}/.
+
+pushd ${BOSH_INSTALL_TARGET}
+
+apt-get install libsqlite3-dev -y
+
+mariadb_dir=/var/vcap/packages/mariadb_connector_c
+libpq_dir=/var/vcap/packages/postgres-13
+
+bosh_generate_runtime_env
+
+bundle config build.pg --with-pg-lib=$libpq_dir/lib --with-pg-include=$libpq_dir/include
+bundle config build.mysql2 --with-mysql-config=$mariadb_dir/bin/mariadb_config
+bundle config set --local path "${BOSH_INSTALL_TARGET}/gem_home"
+
+bundle install --local --binstubs "${BOSH_INSTALL_TARGET}/bin"
+bundle exec rails assets:precompile
+popd
