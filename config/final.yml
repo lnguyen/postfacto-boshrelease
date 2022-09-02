@@ -1,4 +1,4 @@
-name: postfacto-boshrelease
+name: postfacto
 blobstore:
   provider: local
   options:
